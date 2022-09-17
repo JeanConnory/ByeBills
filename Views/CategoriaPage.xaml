@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ByeBills.Views.CategoriaPage"
+             xmlns:model="clr-namespace:ByeBills.Models"
+             xmlns:viewmodel="clr-namespace:ByeBills.ViewModels"
+             x:DataType="viewmodel:CategoriaViewModel"
+             Title="Categoria Page">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddCategoriaCommand}"/>
+    </ContentPage.ToolbarItems>
+    <VerticalStackLayout>
+        <Label Text="Teste" FontSize="Large" />
+    </VerticalStackLayout>
+</ContentPage>
