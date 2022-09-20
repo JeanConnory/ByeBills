@@ -20,6 +20,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<CategoriaPage>();
 		builder.Services.AddSingleton<CategoriaViewModel>();
 
+		builder.Services.AddSingleton<AddCategoriaPage>();
 		builder.Services.AddSingleton<AddCategoriaViewModel>();
 
 		return builder.Build();

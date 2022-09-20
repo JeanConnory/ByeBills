@@ -2,11 +2,33 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ByeBills.Views.AddCategoriaPage"
-             Title="AddCategoriaPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:local="clr-namespace:ByeBills.ViewModels"
+             BackgroundColor="#E8F8F5"
+             Title="Add Categoria">
+    
+    <StackLayout Spacing="5" Padding="15" Margin="10">
+        <VerticalStackLayout IsVisible="False">
+            <Label Text="ID" FontSize="Medium" IsEnabled="False" />
+            <Entry Text="{Binding Categoria.Id, Mode=TwoWay}" FontSize="Medium" IsEnabled="False"/>
+            <BoxView HeightRequest="0.5" Color="Gray" />
+        </VerticalStackLayout>
+        
+        <VerticalStackLayout>
+            <Label Text="Código" FontSize="Medium" />
+            <Entry Text="{Binding Categoria.Codigo, Mode=TwoWay}" FontSize="Medium" />
+            <BoxView HeightRequest="0.5" Color="Gray" />
+        </VerticalStackLayout>
+        
+        <VerticalStackLayout>
+            <Label Text="Nome" FontSize="Medium" />
+            <Entry Text="{Binding Categoria.Nome, Mode=TwoWay}" FontSize="Medium" />
+            <BoxView HeightRequest="0.5" Color="Gray" />
+        </VerticalStackLayout>
+
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Salvar" Command="{Binding SalvarCategoriaCommand}" HorizontalOptions="FillAndExpand" />
+            <Button Text="Cancelar" Command="{Binding OnCancelarCommand}" HorizontalOptions="FillAndExpand" BackgroundColor="#DF5252" />
+        </StackLayout>
+        
+    </StackLayout>
 </ContentPage>

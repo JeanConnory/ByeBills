@@ -12,24 +12,28 @@ namespace ByeBills.Services
     {
         public SQLiteAsyncConnection _database;
 
+        public string StatusMessage { get; set; }
+
         public CategoriaService(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
-            _database.CreateTableAsync<Categoria>().Wait();
+            _database.CreateTableAsync<Categoria>();
         }
 
-        public async Task<bool> AddUpdateCategoriaAsync(Categoria categoria)
+        public async Task AddUpdateCategoriaAsync(Categoria categoria)
         {
+            int result = 0;
+
             if(categoria.Id > 0)
             {
                 await _database.UpdateAsync(categoria);
             }
             else
             {
-                await _database.InsertAsync(categoria);
+                result = await _database.InsertAsync(categoria);
             }
 
-            return await Task.FromResult(true);
+            StatusMessage = string.Format("{0} record(s) added (Name: {1})", result, categoria.Nome);
         }
 
         public async Task<bool> DeleteCategoriaAsync(int categoriaId)

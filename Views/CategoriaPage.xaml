@@ -2,14 +2,52 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ByeBills.Views.CategoriaPage"
-             xmlns:model="clr-namespace:ByeBills.Models"
+             xmlns:models="clr-namespace:ByeBills.Models"
              xmlns:viewmodel="clr-namespace:ByeBills.ViewModels"
              x:DataType="viewmodel:CategoriaViewModel"
              Title="Categoria Page">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddCategoriaCommand}"/>
     </ContentPage.ToolbarItems>
-    <VerticalStackLayout>
-        <Label Text="Teste" FontSize="Large" />
-    </VerticalStackLayout>
+
+    <StackLayout>
+        <RefreshView x:DataType="viewmodel:CategoriaViewModel" Command="{Binding LoadCategoriasCommand}" IsRefreshing="{Binding IsBusy}">
+            <CollectionView ItemsSource="{Binding categoriaList}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Categoria">
+                        <StackLayout Padding="2">
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItem Text="Deletar" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CategoriaViewModel}},
+                                        Path=CategoriaTappedDeleteCommand}" CommandParameter="{Binding .}" BackgroundColor="#DF5252" />
+                                    <SwipeItem IsDestructive="True" Text="Fechar" BackgroundColor="Green" />
+                                </SwipeView.RightItems>
+                                <Grid Padding="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="140" />
+                                        <ColumnDefinition Width="80" />
+                                        <ColumnDefinition Width="80" />
+                                        <ColumnDefinition Width="70" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text="{Binding Nome}" FontAttributes="Bold" FontSize="Large" />
+                                    <Label Grid.Column="1" Text="{Binding Codigo}" FontSize="Large" />
+                                    <Label Grid.Column="2" Text="{Binding Id}" FontSize="Large" />
+                                    <Image Source="edit.png" Grid.Column="3" WidthRequest="30" HeightRequest="30" HorizontalOptions="End">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CategoriaViewModel}},
+                                                Path=CategoriaTappedEditCommand}" CommandParameter="{Binding .}">
+                                            </TapGestureRecognizer>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </SwipeView>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
 </ContentPage>

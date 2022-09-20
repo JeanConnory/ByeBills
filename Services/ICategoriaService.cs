@@ -9,7 +9,7 @@ namespace ByeBills.Services
 {
     public interface ICategoriaService
     {
-        Task<bool> AddUpdateCategoriaAsync(Categoria categoria);
+        Task AddUpdateCategoriaAsync(Categoria categoria);
 
         Task<bool> DeleteCategoriaAsync(int categoriaId);
 

@@ -7,5 +7,7 @@ namespace ByeBills.ViewModels
     {
         [ObservableProperty]
         public Categoria _categoria;
+
+        public INavigation Navigation { get; set; }
     }
 }

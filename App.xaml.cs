@@ -15,7 +15,8 @@ public partial class App : Application
         {
             if (_categoriaService == null)
             {
-                _categoriaService = new CategoriaService(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ByeBills.db3"));
+                _categoriaService = new CategoriaService(System.IO.Path.Combine(FileSystem.AppDataDirectory, "ByeBills.db3"));
+                
             }
             return _categoriaService;
         }
