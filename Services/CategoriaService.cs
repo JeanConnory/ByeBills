@@ -1,10 +1,5 @@
 ﻿using ByeBills.Models;
 using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ByeBills.Services
 {
@@ -20,26 +15,9 @@ namespace ByeBills.Services
             _database.CreateTableAsync<Categoria>();
         }
 
-        public async Task AddUpdateCategoriaAsync(Categoria categoria)
+        public async Task<IEnumerable<Categoria>> GetCategoriaAsync()
         {
-            int result = 0;
-
-            if(categoria.Id > 0)
-            {
-                await _database.UpdateAsync(categoria);
-            }
-            else
-            {
-                result = await _database.InsertAsync(categoria);
-            }
-
-            StatusMessage = string.Format("{0} record(s) added (Name: {1})", result, categoria.Nome);
-        }
-
-        public async Task<bool> DeleteCategoriaAsync(int categoriaId)
-        {
-            await _database.DeleteAsync<Categoria>(categoriaId);
-            return await Task.FromResult(true);
+            return await _database.Table<Categoria>().ToListAsync();
         }
 
         public async Task<Categoria> GetCategoriaAsync(int categoriaId)
@@ -47,9 +25,24 @@ namespace ByeBills.Services
             return await _database.Table<Categoria>().Where(c => c.Id == categoriaId).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Categoria>> GetCategoriaAsync()
+        public async Task<bool> AddUpdateCategoriaAsync(Categoria categoria)
         {
-            return await Task.FromResult(await _database.Table<Categoria>().ToListAsync());
+            if (categoria.Id > 0)
+            {
+                await _database.UpdateAsync(categoria);
+            }
+            else
+            {
+                await _database.InsertAsync(categoria);
+            }
+
+            return await Task.FromResult(true);
+        }
+
+        public async Task<bool> DeleteCategoriaAsync(int catId)
+        {
+            await _database.DeleteAsync<Categoria>(catId);
+            return await Task.FromResult(true);
         }
     }
 }

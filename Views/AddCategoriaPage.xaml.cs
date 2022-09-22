@@ -7,10 +7,10 @@ public partial class AddCategoriaPage : ContentPage
 {
 	public Categoria Categoria { get; set; }
 
-	public AddCategoriaPage(AddCategoriaViewModel addCategoriaViewModel)
+	public AddCategoriaPage()
 	{
 		InitializeComponent();
-		BindingContext = addCategoriaViewModel;
+        this.BindingContext = new AddCategoriaViewModel();
     }
 
     public AddCategoriaPage(Categoria categoria)
@@ -18,9 +18,9 @@ public partial class AddCategoriaPage : ContentPage
         InitializeComponent();
         BindingContext = new AddCategoriaViewModel();
 
-        //if(categoria != null)
-        //{
-        //    ((AddCategoriaViewModel)BindingContext).Categoria = categoria;
-        //}
+        if(categoria != null)
+        {
+            ((AddCategoriaViewModel)BindingContext).Categoria = categoria;
+        }
     }
 }

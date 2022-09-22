@@ -18,7 +18,7 @@
             <Entry Text="{Binding Categoria.Codigo, Mode=TwoWay}" FontSize="Medium" />
             <BoxView HeightRequest="0.5" Color="Gray" />
         </VerticalStackLayout>
-        
+
         <VerticalStackLayout>
             <Label Text="Nome" FontSize="Medium" />
             <Entry Text="{Binding Categoria.Nome, Mode=TwoWay}" FontSize="Medium" />

@@ -8,13 +8,12 @@ namespace ByeBills.ViewModels
 {
     public partial class CategoriaViewModel : BaseCategoriaViewModel
     {
-        private readonly INavigation _navigation;
-
         public ObservableCollection<Categoria> categoriaList { get; }
 
-        public CategoriaViewModel()
+        public CategoriaViewModel(INavigation navigation)
         {
             categoriaList = new ObservableCollection<Categoria>();
+            Navigation = navigation;
         }
 
 
@@ -68,7 +67,7 @@ namespace ByeBills.ViewModels
         {
             if (categoria == null)
                 return;
-            await _navigation.PushAsync(new AddCategoriaPage(categoria));
+            await Navigation.PushAsync(new AddCategoriaPage(categoria));
         }
 
 

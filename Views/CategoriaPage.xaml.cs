@@ -5,18 +5,17 @@ namespace ByeBills.Views;
 
 public partial class CategoriaPage : ContentPage
 {
-	private readonly CategoriaViewModel _categoriaViewModel;
+	CategoriaViewModel categoriaViewModel;
 
-	public CategoriaPage(CategoriaViewModel categoriaViewModel)
+	public CategoriaPage()
 	{
 		InitializeComponent();
-		BindingContext = categoriaViewModel;
-		_categoriaViewModel = categoriaViewModel;
+		this.BindingContext = categoriaViewModel = new CategoriaViewModel(Navigation);
 	}
 
 	protected override void OnAppearing()
 	{
 		base.OnAppearing();
-		_categoriaViewModel.OnAppearing();
+		categoriaViewModel.OnAppearing();
 	}
 }

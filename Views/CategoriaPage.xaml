@@ -5,6 +5,7 @@
              xmlns:models="clr-namespace:ByeBills.Models"
              xmlns:viewmodel="clr-namespace:ByeBills.ViewModels"
              x:DataType="viewmodel:CategoriaViewModel"
+             x:Name="thisPage"
              Title="Categoria Page">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddCategoriaCommand}"/>
@@ -18,8 +19,7 @@
                         <StackLayout Padding="2">
                             <SwipeView>
                                 <SwipeView.RightItems>
-                                    <SwipeItem Text="Deletar" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CategoriaViewModel}},
-                                        Path=CategoriaTappedDeleteCommand}" CommandParameter="{Binding .}" BackgroundColor="#DF5252" />
+                                    <SwipeItem Text="Deletar" Command="{Binding BindingContext.CategoriaTappedDeleteCommand, Source={x:Reference thisPage}}" CommandParameter="{Binding .}" BackgroundColor="#DF5252" />
                                     <SwipeItem IsDestructive="True" Text="Fechar" BackgroundColor="Green" />
                                 </SwipeView.RightItems>
                                 <Grid Padding="10">
@@ -37,8 +37,7 @@
                                     <Label Grid.Column="2" Text="{Binding Id}" FontSize="Large" />
                                     <Image Source="edit.png" Grid.Column="3" WidthRequest="30" HeightRequest="30" HorizontalOptions="End">
                                         <Image.GestureRecognizers>
-                                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CategoriaViewModel}},
-                                                Path=CategoriaTappedEditCommand}" CommandParameter="{Binding .}">
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding BindingContext.CategoriaTappedEditCommand, Source={x:Reference thisPage}}" CommandParameter="{Binding .}">
                                             </TapGestureRecognizer>
                                         </Image.GestureRecognizers>
                                     </Image>
